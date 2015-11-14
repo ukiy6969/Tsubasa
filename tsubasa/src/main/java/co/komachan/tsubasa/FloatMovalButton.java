@@ -69,7 +69,7 @@ public class FloatMovalButton extends Button implements View.OnTouchListener {
                 return false;
             case MotionEvent.ACTION_UP:
                 Log.d("TouchEvent", "getAction()" + "ACTION_UP");
-                break;
+                return true;
             case MotionEvent.ACTION_MOVE:
             case MotionEvent.ACTION_OUTSIDE:
                 Log.d("TouchEvent", "getAction()" + "ACTION_MOVE" + event.getX()+" "+event.getY());
