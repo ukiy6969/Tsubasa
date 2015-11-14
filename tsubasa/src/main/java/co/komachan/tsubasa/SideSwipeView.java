@@ -19,9 +19,11 @@ public class SideSwipeView extends View implements View.OnTouchListener {
     public static int SWIPE_TOUCH_HEIGHT = WindowManager.LayoutParams.MATCH_PARENT;
     public WindowManager.LayoutParams ssvParams;
     private Handler handler = new Handler();
+    private WindowManager windowManager;
 
-    public SideSwipeView(Context c) {
+    public SideSwipeView(Context c, WindowManager wm) {
         super(c);
+        windowManager = wm;
         ssvParams = new WindowManager.LayoutParams(
                 SideSwipeView.SWIPE_TOUCH_WIDTH,SideSwipeView.SWIPE_TOUCH_HEIGHT,0,0,
                 WindowManager.LayoutParams.TYPE_PHONE,
@@ -32,6 +34,10 @@ public class SideSwipeView extends View implements View.OnTouchListener {
         );
         ssvParams.gravity = Gravity.LEFT | Gravity.TOP;
         this.setBackgroundColor(Color.RED);
+    }
+
+    public void show() {
+        windowManager.addView(this, ssvParams);
     }
 
 

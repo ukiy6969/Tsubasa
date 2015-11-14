@@ -29,7 +29,8 @@ public class TsubasaService extends Service {
         super.onStartCommand(intent, flags, startId);
         LayoutInflater li = LayoutInflater.from(this);
         wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
-        sideSwipeView = new SideSwipeView(this);
+        sideSwipeView = new SideSwipeView(this, wm);
+        sideSwipeView.show();
         /*
         view.setBackgroundColor(Color.RED);
         clickBtn = (Button) li.inflate(R.layout.float_moval_button, null);
