@@ -31,6 +31,7 @@ public class TsubasaService extends Service {
         wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         sideSwipeView = new SideSwipeView(this, wm);
         final FloatMovalButton fmbtn = new FloatMovalButton(this, wm, 0, 0, 400, 300);
+        Log.v("TsubasaService", "width "+ fmbtn.getWidth()+" height "+fmbtn.getHeight());
         sideSwipeView.show();
         sideSwipeView.setOnTouchListener(new View.OnTouchListener() {
             @Override

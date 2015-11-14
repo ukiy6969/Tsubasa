@@ -17,6 +17,8 @@ public class FloatMovalButton extends Button implements View.OnTouchListener {
     private int y;
     private int preX;
     private int preY;
+    private int initialX;
+    private int initialY;
     private int width;
     private int height;
     public static int MARGIN_W;
@@ -60,11 +62,16 @@ public class FloatMovalButton extends Button implements View.OnTouchListener {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 Log.d("TouchEvent", "getAction()" + "ACTION_DOWN");
-                break;
+                preX = (int)event.getRawX();
+                preY = (int)event.getRawY();
+                initialX = windowManegerParams.x;
+                initialY = windowManegerParams.y;
+                return false;
             case MotionEvent.ACTION_UP:
                 Log.d("TouchEvent", "getAction()" + "ACTION_UP");
                 break;
             case MotionEvent.ACTION_MOVE:
+            case MotionEvent.ACTION_OUTSIDE:
                 Log.d("TouchEvent", "getAction()" + "ACTION_MOVE" + event.getX()+" "+event.getY());
                 final int eventX = (int)event.getRawX();
                 final int eventY = (int)event.getRawY();
@@ -73,26 +80,23 @@ public class FloatMovalButton extends Button implements View.OnTouchListener {
                     public void run() {
                         int direX = eventX - preX;
                         int direY = eventY - preY;
-                        preX = eventX;
-                        preY = eventY;
-                        int moveToX = direX > 0 ? 100 : -100;
-                        int moveToY = direY > 0 ? 100 : -100;
-                        windowManegerParams.x =   direX;
-                        windowManegerParams.y =  direY;
+                        //preX = eventX;
+                        //preY = eventY;
+                        //int moveToX = direX > 0 ? 100 : -100;
+                        //int moveToY = direY > 0 ? 100 : -100;
+                        windowManegerParams.x =  initialX +  direX;
+                        windowManegerParams.y =  initialY +  direY;
                         windowManager.removeView(FloatMovalButton.this);
                         windowManager.addView(FloatMovalButton.this, windowManegerParams);
                     }
                 });
-
-                break;
+                return false;
             case MotionEvent.ACTION_CANCEL:
                 Log.d("TouchEvent", "getAction()" + "ACTION_CANCEL");
-                break;
-            case MotionEvent.ACTION_OUTSIDE:
                 Log.d("TouchEvent", "getAction()" + "ACTION_OUTSIDE"+event.getX()+" "+event.getY());
                 break;
         }
-        return false;
+        return true;
     }
 
 }
