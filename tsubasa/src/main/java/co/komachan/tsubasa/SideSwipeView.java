@@ -40,6 +40,10 @@ public class SideSwipeView extends View implements View.OnTouchListener {
         windowManager.addView(this, ssvParams);
     }
 
+    public void hide() {
+        windowManager.removeView(this);
+    }
+
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {

@@ -36,6 +36,7 @@ public class TsubasaService extends Service {
             @Override
             public void onClick(View v) {
                 fmbtn.show();
+                sideSwipeView.hide();
             }
         });
         /*

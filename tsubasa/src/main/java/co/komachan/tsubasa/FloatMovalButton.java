@@ -38,6 +38,10 @@ public class FloatMovalButton extends Button implements View.OnTouchListener {
                     WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
                 PixelFormat.TRANSPARENT
         );
+
+        this.setWidth(width);
+        this.setHeight(height);
+        this.setText("TEST");
     }
 
     public void moveTo(int x, int y) {
@@ -64,11 +68,11 @@ public class FloatMovalButton extends Button implements View.OnTouchListener {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        //clickBtn.setX(event.getX());
-                        //clickBtn.setY(event.getY());
                         windowManegerParams.x += eventX > (windowManegerParams.x - 400/2) ? 10 : -10;
                         windowManegerParams.y += eventY > (windowManegerParams.y - 300/2) ?10 : -10;
                         windowManager.removeView(FloatMovalButton.this);
+                        windowManager.addView(FloatMovalButton.this, windowManegerParams);
+                        //windowManager.removeView(FloatMovalButton.this);
                         /*
                         windowManager.addView(FloatMovalButton.this, new WindowManager.LayoutParams(
                                400,300,(int)event.getX(),(int)event.getY(),
