@@ -6,10 +6,13 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+
+import co.komachan.tsubasa.TsubasaService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,11 +24,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Button startBtn = (Button) findViewById(R.id.startBtn);
         startBtn.setOnClickListener((view) -> {
-            startService(new Intent(this, MyFirstService.class));
+            Log.d("MainActivity", "start click");
+            startService(new Intent(this, TsubasaService.class));
         });
         Button stopBtn = (Button) findViewById(R.id.stopBtn);
         stopBtn.setOnClickListener((view) -> {
-            stopService((new Intent(this, MyFirstService.class)));
+            stopService((new Intent(this, TsubasaService.class)));
         });
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
