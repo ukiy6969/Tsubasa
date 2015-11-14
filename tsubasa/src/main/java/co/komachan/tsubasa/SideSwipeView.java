@@ -40,6 +40,10 @@ public class SideSwipeView extends View implements View.OnTouchListener {
         windowManager.addView(this, ssvParams);
     }
 
+    public void hide() {
+        windowManager.removeView(this);
+    }
+
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
@@ -53,16 +57,6 @@ public class SideSwipeView extends View implements View.OnTouchListener {
                 break;
             case MotionEvent.ACTION_MOVE:
                 Log.d("TouchEvent", "getAction()" + "ACTION_MOVE");
-                /*
-                handler.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        wm.removeView(view);
-                        wm.addView(clickBtn, params);
-                        clickBtn.setVisibility(View.VISIBLE);
-                    }
-                });
-                */
                 break;
             case MotionEvent.ACTION_CANCEL:
                 Log.d("TouchEvent", "getAction()" + "ACTION_CANCEL");

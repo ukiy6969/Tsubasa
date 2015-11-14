@@ -15,6 +15,8 @@ import android.widget.Button;
 public class FloatMovalButton extends Button implements View.OnTouchListener {
     private int x;
     private int y;
+    private int preX;
+    private int preY;
     private int width;
     private int height;
     public static int MARGIN_W;
@@ -31,13 +33,18 @@ public class FloatMovalButton extends Button implements View.OnTouchListener {
         width = initWidth;
         height = initHeight;
         windowManegerParams = new WindowManager.LayoutParams(
-                width, height, x - (width/2), y - (height/2),
+                width, height, x, y,
                 WindowManager.LayoutParams.TYPE_PHONE,
                 WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
                     WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
                     WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
                 PixelFormat.TRANSPARENT
         );
+
+        this.setWidth(width);
+        this.setHeight(height);
+        this.setText("TEST");
+        this.setOnTouchListener(this);
     }
 
     public void moveTo(int x, int y) {
@@ -59,26 +66,21 @@ public class FloatMovalButton extends Button implements View.OnTouchListener {
                 break;
             case MotionEvent.ACTION_MOVE:
                 Log.d("TouchEvent", "getAction()" + "ACTION_MOVE" + event.getX()+" "+event.getY());
-                final int eventX = (int)event.getX();
-                final int eventY = (int)event.getY();
+                final int eventX = (int)event.getRawX();
+                final int eventY = (int)event.getRawY();
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        //clickBtn.setX(event.getX());
-                        //clickBtn.setY(event.getY());
-                        windowManegerParams.x += eventX > (windowManegerParams.x - 400/2) ? 10 : -10;
-                        windowManegerParams.y += eventY > (windowManegerParams.y - 300/2) ?10 : -10;
+                        int direX = eventX - preX;
+                        int direY = eventY - preY;
+                        preX = eventX;
+                        preY = eventY;
+                        int moveToX = direX > 0 ? 100 : -100;
+                        int moveToY = direY > 0 ? 100 : -100;
+                        windowManegerParams.x =   direX;
+                        windowManegerParams.y =  direY;
                         windowManager.removeView(FloatMovalButton.this);
-                        /*
-                        windowManager.addView(FloatMovalButton.this, new WindowManager.LayoutParams(
-                               400,300,(int)event.getX(),(int)event.getY(),
-                                WindowManager.LayoutParams.TYPE_PHONE,
-                                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE |
-                                        WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL |
-                                        WindowManager.LayoutParams.FLAG_WATCH_OUTSIDE_TOUCH,
-                                PixelFormat.TRANSPARENT
-                        ));
-                        */
+                        windowManager.addView(FloatMovalButton.this, windowManegerParams);
                     }
                 });
 
