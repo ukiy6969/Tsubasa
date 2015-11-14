@@ -30,7 +30,14 @@ public class TsubasaService extends Service {
         LayoutInflater li = LayoutInflater.from(this);
         wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         sideSwipeView = new SideSwipeView(this, wm);
+        final FloatMovalButton fmbtn = new FloatMovalButton(this, wm, 0, 0, 400, 300);
         sideSwipeView.show();
+        sideSwipeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fmbtn.show();
+            }
+        });
         /*
         view.setBackgroundColor(Color.RED);
         clickBtn = (Button) li.inflate(R.layout.float_moval_button, null);

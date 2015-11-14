@@ -45,6 +45,10 @@ public class FloatMovalButton extends Button implements View.OnTouchListener {
         windowManegerParams.y = y - (height / 2);
     }
 
+    public void show() {
+        windowManager.addView(this, windowManegerParams);
+    }
+
     public boolean onTouch(View v, MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
