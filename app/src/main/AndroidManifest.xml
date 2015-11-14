@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".MyFirstService"></service>
+        <service android:name="co.komachan.tsubasa.TsubasaService"></service>
 
     </application>
 
